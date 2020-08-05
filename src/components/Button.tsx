@@ -14,8 +14,7 @@ export function Button(props: ButtonProps) {
     <button
       className={classNames('button', className, {
         'button--outline': outline,
-      })}
-      onClick={() => alert(children)}>
+      })}>
       {children}
     </button>
   );
