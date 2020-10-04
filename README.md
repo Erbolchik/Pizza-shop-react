@@ -1,5 +1,5 @@
 **install package**
-npm/yarn install for download dep.
+npm/yarn install for download dep.<p>
 **Npm**
 npm run start - for npm package manager. 
 **Yarn**
