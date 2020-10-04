@@ -6,7 +6,7 @@ npm run start - for npm package manager.<p>
 yarn start - for yarn package manager.<p>
 
 Stack:
-**
+
 ReactJS + хуки
 React Router
 Redux
@@ -14,4 +14,4 @@ Redux thunk
 json-server
 Axios
 classnames
-**
+
