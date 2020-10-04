@@ -1,12 +1,14 @@
 import React from 'react';
 import { Categories, SortPopup, PizzaBlock } from '../components';
-import { pizzaProp } from '../App';
 
 const itemsCategories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
-const sortItems = ['популярности', 'цене', 'алфавиту'];
+const sortItems = [
+  { name: 'популярности', type: 'popular' },
+  { name: 'цене', type: 'price' },
+  { name: 'алфавиту', type: 'alphabet' },
+];
 
 export function Home({ items }: any) {
-  debugger;
   return (
     <div className="content">
       <div className="container">
@@ -16,9 +18,10 @@ export function Home({ items }: any) {
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
-          {items.map((item: any) => {
-            return <PizzaBlock key={item.id} {...item} />;
-          })}
+          {items &&
+            items.map((item: any) => {
+              return <PizzaBlock key={item.id} {...item} />;
+            })}
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+
 type SortPopupProps = {
-  items?: Array<string>;
+  items?: Array<{ name: string; type: string }>;
 };
 
 export function SortPopup(props: SortPopupProps) {
@@ -37,19 +38,19 @@ export function SortPopup(props: SortPopupProps) {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisiblePopup}>{items && items[activeItem]}</span>
+        <span onClick={toggleVisiblePopup}>{items && items[activeItem].name}</span>
       </div>
       {isVisible && (
         <div className="sort__popup">
           <ul>
             {items &&
-              items.map((name: string, index: number) => {
+              items.map((elements: { name: string; type: string }, index: number) => {
                 return (
                   <li
-                    key={`${name}_${index}`}
+                    key={`${elements.name}_${index}`}
                     className={activeItem === index ? 'active' : ''}
                     onClick={() => onSelectItem(index)}>
-                    {name}
+                    {elements.name}
                   </li>
                 );
               })}
