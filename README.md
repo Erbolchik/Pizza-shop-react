@@ -1,8 +1,8 @@
-#install package
+**install package**
 npm/yarn install for download dep.
-#Npm
+**Npm**
 npm run start - for npm package manager. 
-#Yarn
+**Yarn**
 yarn start - for yarn package manager.
 
 Stack:
