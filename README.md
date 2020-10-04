@@ -5,13 +5,13 @@ npm run start - for npm package manager.<p>
 **Yarn**
 yarn start - for yarn package manager.<p>
 
-Stack:
-
-ReactJS + хуки
-React Router
-Redux
-Redux thunk
-json-server
-Axios
-classnames
-
+**Stack**:
+<ul>
+<li>ReactJS + хуки</li>
+<li>React Router</li>
+<li>Redux</li>
+<li>Redux thunk</li>
+<li>json-server</li>
+  <li>Axios</li>
+  <li>classnames</li>
+<ul>
