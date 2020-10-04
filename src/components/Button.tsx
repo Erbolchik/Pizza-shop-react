@@ -5,7 +5,7 @@ type ButtonProps = {
   outline?: boolean;
   children?: React.ReactNode;
   className?: string;
-  onClick?: void;
+  onClick?: () => void;
 };
 
 export function Button(props: ButtonProps) {

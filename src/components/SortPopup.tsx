@@ -1,24 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
-type SortPopupProps = {
-  items?: Array<{ name: string; type: string }>;
-};
+export const SortPopup = React.memo(function SortPopup({
+  items,
+  activeSortType,
+  onClickSortType,
+}: {
+  items: any;
+  activeSortType: number;
+  onClickSortType: (index: number) => void;
+}) {
+  const [visiblePopup, setVisiblePopup] = React.useState(false);
+  const sortRef = React.useRef<any>();
+  const activeLabel = items.find((obj: any) => obj.type === activeSortType).name;
 
-export function SortPopup(props: SortPopupProps) {
-  const { items } = props;
-  const [isVisible, setIsVisible] = useState(false);
-  const [activeItem, setActiveItem] = useState(0);
-  const sortRef = useRef<HTMLDivElement>(null);
-
-  const onSelectItem = (index: number) => {
-    setActiveItem(index);
-    setIsVisible(false);
+  const toggleVisiblePopup = () => {
+    setVisiblePopup(!visiblePopup);
   };
-  const toggleVisiblePopup = () => setIsVisible(!isVisible);
-  const handleOutsideClick = (e: any) => {
-    !e.path.includes(sortRef.current) && setIsVisible(false);
+
+  const handleOutsideClick = (event: any) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+    if (!path.includes(sortRef.current)) {
+      setVisiblePopup(false);
+    }
   };
-  useEffect(() => {
+
+  const onSelectItem = (index: any) => {
+    if (onClickSortType) {
+      onClickSortType(index);
+    }
+    setVisiblePopup(false);
+  };
+
+  React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick);
   }, []);
 
@@ -26,7 +39,7 @@ export function SortPopup(props: SortPopupProps) {
     <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
-          className={isVisible ? 'rotated' : ''}
+          className={visiblePopup ? 'rotated' : ''}
           width="10"
           height="6"
           viewBox="0 0 10 6"
@@ -38,25 +51,23 @@ export function SortPopup(props: SortPopupProps) {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisiblePopup}>{items && items[activeItem].name}</span>
+        <span onClick={toggleVisiblePopup}>{activeLabel}</span>
       </div>
-      {isVisible && (
+      {visiblePopup && (
         <div className="sort__popup">
           <ul>
             {items &&
-              items.map((elements: { name: string; type: string }, index: number) => {
-                return (
-                  <li
-                    key={`${elements.name}_${index}`}
-                    className={activeItem === index ? 'active' : ''}
-                    onClick={() => onSelectItem(index)}>
-                    {elements.name}
-                  </li>
-                );
-              })}
+              items.map((obj: { type: number; name: string }, index: number) => (
+                <li
+                  onClick={() => onSelectItem(obj)}
+                  className={activeSortType === obj.type ? 'active' : ''}
+                  key={`${obj.type}_${index}`}>
+                  {obj.name}
+                </li>
+              ))}
           </ul>
         </div>
       )}
     </div>
   );
-}
+});
